@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- SQL문 넣어놓는 맵퍼 파일 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hs.mybatis.MemberMapper"> <!-- namespace의 경우, 맵퍼 여러 개 사용할 경우 중복될 수 있기 때문에 고유한 이름을 지어주는 것. -->
+    
+    <select id="memberList" resultType="memberVO"> <!-- id(보통 메서드 이름)를 통해 SQL문과 DAO 파일을 연결 -->
+        										   <!-- resultType에는 SQL문에 대한 결과를 묶어줄 타입을 적는다. -->
+        										   <!-- config에서 typeAlias 설정하면 모든 경로 안 적어줘도 된다. -->
+        select * from member3
+    </select>
+    
+    <insert id="memberInsert" parameterType="memberVO"> <!-- session.insert() 인자로 넘어오는 파라미터 정보를 설정해줘야 values 설정 가능 -->
+        insert into member3(id, pass, name, age, email, auth) 
+        values(
+        #{id}, 
+        #{pass}, 
+        #{name}, 
+        #{age},
+        #{email}, 
+        #{auth}
+        ) <!-- 파라미터는 #{파라미터} 이렇게 사용 -->
+    </insert>
+    
+    <delete id="memberDelete" parameterType="Integer"> <!-- session.delete에서 넘어오는 타입은 오브젝트 타입이라 Integer 적어준다. -->
+        delete from member3 where num=#{num}
+    </delete>
+    
+    <select id="memberContent" parameterType="String" resultType="memberVO"> <!-- num 넘어오고, memberVO로 묶어줘야 하기 때문에  -->
+        																	  <!-- parameterType, resultType 둘 다 써줘야 한다.  -->
+        select * from member3 where id=#{id}
+    </select>
+    
+    <update id="memberUpdate" parameterType="memberVO">
+        update member3 set age=#{age}, email=#{email}, phone=#{phone} 
+        where num=#{num}
+    </update>
+    
+    <select id="memberDbcheck" parameterType="String" resultType="String"> 
+        select id from member3 where id=#{id}
+    </select>
+    
+</mapper>

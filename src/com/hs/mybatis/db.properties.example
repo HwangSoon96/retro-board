@@ -1,0 +1,4 @@
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+username=YOUR_DB_USER
+password=YOUR_DB_PASSWORD

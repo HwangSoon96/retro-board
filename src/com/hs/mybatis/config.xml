@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- MyBatis 환경설정파일 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="com/hs/mybatis/db.properties"/> <!-- db.properties를 연결, 클래스가 아니므로 경로에 .(점)이 아닌 / 써줘야 한다. -->
+  <typeAliases> <!-- type 별칭 설정 -->
+      <typeAlias type="com.hs.model.MemberVO" alias="memberVO"/> <!-- 앞에 있는 type을 alias(보통 맨앞에 소문자)처럼 쓰겠다. -->
+      <typeAlias type="com.hs.model.BoardVO" alias="boardVO"/> <!-- 앞에 있는 type을 alias(보통 맨앞에 소문자)처럼 쓰겠다. -->
+      <typeAlias type="com.hs.model.CryptVO" alias="cryptVO"/> <!-- 앞에 있는 type을 alias(보통 맨앞에 소문자)처럼 쓰겠다. -->
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/> <!-- db.properties 연결한 정보가 여기에 들어간다. -->
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="com/hs/mybatis/MemberMapper.xml"/> <!-- 맵퍼 파일 연결, 여러개 등록 가능 -->
+    <mapper resource="com/hs/mybatis/BoardMapper.xml"/>
+    <mapper resource="com/hs/mybatis/CryptMapper.xml"/>
+  </mappers>
+</configuration>

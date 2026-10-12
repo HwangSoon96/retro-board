@@ -1,0 +1,9 @@
+# 빌드 산출물
+build/
+*.class
+
+# 비밀값 (예시 파일을 복사해서 사용)
+WebContent/WEB-INF/key.txt
+src/com/hs/mybatis/db.properties
+
+.DS_Store

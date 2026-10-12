@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- SQL문 넣어놓는 맵퍼 파일 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hs.mybatis.BoardMapper"> <!-- namespace의 경우, 맵퍼 여러 개 사용할 경우 중복될 수 있기 때문에 고유한 이름을 지어주는 것. -->
+    
+    <select id="boardList" resultType="boardVO"> <!-- typeAlias -->
+    	select * from board order by idx desc <!-- 게시물 번호 내림차순으로 가져온다. -->
+    </select>
+    
+    <insert id="boardInsert" parameterType="boardVO">
+	  	insert into board(title, contents, count, writer)
+		values(#{title}, #{contents}, #{count}, #{writer})
+    </insert>
+    
+    <select id="boardContent" parameterType="Integer" resultType="boardVO">
+  		select * from board where idx=#{idx}
+    </select>
+    
+    <update id="boardUpdate" parameterType="boardVO">
+	  	update board set title=#{title}, contents=#{contents}
+	  	where idx=#{idx}
+    </update>
+    
+    <delete id="boardDelete" parameterType="Integer">
+  		delete from board where idx=#{idx}
+    </delete>
+    
+    <delete id="boardDeleteAll" parameterType="String">
+  		delete from board where writer=#{writer}
+    </delete>
+    
+    <update id="boardCount" parameterType="Integer">
+  		update board set count=count+1 where idx=#{idx}
+    </update>
+    
+</mapper>
